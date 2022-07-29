@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huntcn_front.dao.huntbus.HuntbusMapper">
+
+  <resultMap id="BaseResultMap" type="com.huntcn_front.dao.huntbus.model.Huntbus">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="area" jdbcType="VARCHAR" property="area"/>
+    <result column="server" jdbcType="VARCHAR" property="server"/>
+    <result column="version" jdbcType="VARCHAR" property="version"/>
+    <result column="map" jdbcType="VARCHAR" property="map"/>
+    <result column="road" jdbcType="VARCHAR" property="road"/>
+    <result column="time" jdbcType="VARCHAR" property="time"/>
+    <result column="note" jdbcType="VARCHAR" property="note"/>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    `id`, `area`, `server`, `version`, `map`, `road`, `time`, `note`
+  </sql>
+  <select id="selectByExample" parameterType="com.huntcn_front.dao.huntbus.model.HuntbusExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>
+    from `huntbus`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `huntbus`
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByarea" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `huntbus`
+    where `area` = #{area,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `huntbus`
+    where `id` = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huntcn_front.dao.huntbus.model.HuntbusExample">
+    delete from `huntbus`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huntcn_front.dao.huntbus.model.Huntbus">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `huntbus` (
+      `area`, 
+      `server`, 
+      `version`, 
+      `map`, 
+      `road`, 
+      `time`, 
+      `note`
+    )
+    values (
+      #{area,jdbcType=VARCHAR}, 
+      #{server,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, 
+      #{map,jdbcType=VARCHAR}, 
+      #{road,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huntcn_front.dao.huntbus.model.Huntbus">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `huntbus`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="area != null">
+      `area`,
+      </if>
+      <if test="server != null">
+      `server`,
+      </if>
+      <if test="version != null">
+      `version`,
+      </if>
+      <if test="map != null">
+      `map`,
+      </if>
+      <if test="road != null">
+      `road`,
+      </if>
+      <if test="time != null">
+      `time`,
+      </if>
+      <if test="note != null">
+      `note`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="area != null">
+      #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="server != null">
+      #{server,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+      #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="map != null">
+      #{map,jdbcType=VARCHAR},
+      </if>
+      <if test="road != null">
+      #{road,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+      #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+      #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huntcn_front.dao.huntbus.model.HuntbusExample" resultType="java.lang.Integer">
+    select count(*) from `huntbus`
+    <if test="_parameter != null">
+    <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update `huntbus`
+    <set>
+      <if test="record.area != null">
+      `area` = #{record.area,jdbcType=VARCHAR}, 
+      </if>
+      <if test="record.server != null">
+      `server` = #{record.server,jdbcType=VARCHAR}, 
+      </if>
+      <if test="record.version != null">
+      `version` = #{record.version,jdbcType=VARCHAR}, 
+      </if>
+      <if test="record.map != null">
+      `map` = #{record.map,jdbcType=VARCHAR}, 
+      </if>
+      <if test="record.road != null">
+      `road` = #{record.road,jdbcType=VARCHAR}, 
+      </if>
+      <if test="record.time != null">
+      `time` = #{record.time,jdbcType=VARCHAR}, 
+      </if>
+      <if test="record.note != null">
+      `note` = #{record.note,jdbcType=VARCHAR}
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update `huntbus`
+    <set>
+      `area` = #{record.area,jdbcType=VARCHAR}, 
+      `server` = #{record.server,jdbcType=VARCHAR}, 
+      `version` = #{record.version,jdbcType=VARCHAR}, 
+      `map` = #{record.map,jdbcType=VARCHAR}, 
+      `road` = #{record.road,jdbcType=VARCHAR}, 
+      `time` = #{record.time,jdbcType=VARCHAR}, 
+      `note` = #{record.note,jdbcType=VARCHAR}
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huntcn_front.dao.huntbus.model.Huntbus">
+    update `huntbus`
+    <set>
+      <if test="area != null">
+      `area` = #{area,jdbcType=VARCHAR}, 
+      </if>
+      <if test="server != null">
+      `server` = #{server,jdbcType=VARCHAR}, 
+      </if>
+      <if test="version != null">
+      `version` = #{version,jdbcType=VARCHAR}, 
+      </if>
+      <if test="map != null">
+      `map` = #{map,jdbcType=VARCHAR}, 
+      </if>
+      <if test="road != null">
+      `road` = #{road,jdbcType=VARCHAR}, 
+      </if>
+      <if test="time != null">
+      `time` = #{time,jdbcType=VARCHAR}, 
+      </if>
+      <if test="note != null">
+      `note` = #{note,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huntcn_front.dao.huntbus.model.Huntbus">
+    update `huntbus`
+    <set>
+      `area` = #{area,jdbcType=VARCHAR}, 
+      `server` = #{server,jdbcType=VARCHAR}, 
+      `version` = #{version,jdbcType=VARCHAR}, 
+      `map` = #{map,jdbcType=VARCHAR}, 
+      `road` = #{road,jdbcType=VARCHAR}, 
+      `time` = #{time,jdbcType=VARCHAR}, 
+      `note` = #{note,jdbcType=VARCHAR}
+    </set>
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

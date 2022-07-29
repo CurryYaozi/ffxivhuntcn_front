@@ -1,0 +1,10 @@
+{
+  "project": 5319,
+  "template": {
+    "alias": "springboot",
+    "command": "interface",
+    "option": {
+      "resources": "huntbus"
+    }
+  }
+}
