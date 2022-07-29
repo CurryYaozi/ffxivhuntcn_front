@@ -1,5 +1,12 @@
 
-# 使用springboot+Mybatis搭建的FFXIV国服狩猎站前台后端数据
+# 使用springboot+Mybatis搭建的FFXIV国服狩猎站前台网站后端内容
+-浏览我们的网页：https://ffxivhuntcn.com/#/home/index
+
+---
+
+#计划实现的功能
+-查询各服务器狩猎车内容 √
+-特殊fate倒计时 ×
 
 
 
