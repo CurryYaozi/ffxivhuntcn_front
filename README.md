@@ -77,7 +77,7 @@ BaseController: 位于com.huntcn_front.api
 
 # 关于Swagger
 #### Swagger地址
-http://localhost:8080/doc.html
+http://101.43.32.88:10076/doc.html
 
 #### Swagger的启用和禁用
 在application.properties中修改swagger.enabled即可，true表示启用Swagger，false表示禁用Swagger。在项目启动后可查看Swagger的状态。
